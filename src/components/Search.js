@@ -24,16 +24,16 @@ const Search = () => {
   const handleChange = async (event) => {
     try {
       serUsername(event.target.value);
-      throt_fun();
+      throt_fun(event.target.value);
     } catch (error) {
       throw new Error(error || error.message);
     }
   };
 
   // Calling throttle() method with its parameter
-  const throt_fun = _.throttle(async () => {
+  const throt_fun = _.throttle(async (value) => {
     try {
-      const response = await getGistForUser(username);
+      const response = await getGistForUser(value);
       if (response.status === 200) {
         setPublicGists(response.data);
       } else {
