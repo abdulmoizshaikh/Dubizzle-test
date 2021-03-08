@@ -10,7 +10,6 @@ import { getGistForUser } from "../services/gistService";
 import { RootContext } from "../App";
 
 const Search = () => {
-  const [username, serUsername] = useState("");
   const state = useContext(RootContext);
 
   /**
@@ -23,7 +22,6 @@ const Search = () => {
   // handler for update state when input change (i.e user type his/her name)
   const handleChange = async (event) => {
     try {
-      serUsername(event.target.value);
       throt_fun(event.target.value);
     } catch (error) {
       throw new Error(error || error.message);
