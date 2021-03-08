@@ -3,4 +3,4 @@ const octokit = new Octokit()
 
 export const getPublicGists = () => octokit.gists.listPublic()
 
-export const getGistForUser = username =>  octokit.gists.listForUser({ username });
+export const getGistForUser = username => octokit.gists.listForUser({ username });

@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Octicon from 'react-octicon'
 
+// services
+import { getGistForUser } from "../services/gistService";
+
 const Search = () => {
+  const [username, serUsername] = useState("");
+
+  // handler for update state when input change (i.e user type his/her name)
+  const handleChange = (event) => serUsername(event.target.value)
+
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input placeholder="Search Gists for the username" onChange={handleChange} />
       </InputBox>
     </Wrapper>
   )
