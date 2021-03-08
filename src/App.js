@@ -14,7 +14,6 @@ export const RootContext = createContext();
 
 const App = () => {
   const [publicGists, setPublicGists] = useState([]);
-  const [gistForUser, setGistForUser] = useState([]);
 
   useEffect(() => {
     /**handler for getting list of public list when component view loads */
@@ -24,7 +23,6 @@ const App = () => {
   const getPublicGistsHandler = async () => {
     try {
       const { data } = await getPublicGists();
-      console.log("data[0]", data[0]);
       setPublicGists(data);
       return () => {
         // cleanup;
@@ -38,7 +36,6 @@ const App = () => {
     <RootContext.Provider
       value={{
         pubGists: [publicGists, setPublicGists],
-        userGists: [gistForUser, setGistForUser],
       }}
     >
       <Wrapper className="App" data-testid="app">

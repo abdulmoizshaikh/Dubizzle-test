@@ -1,32 +1,61 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React, { useContext, useState } from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+
+// Requiring lodash library
+import _ from "lodash";
 
 // services
-// import { getGistForUser } from "../services/gistService";
+import { getGistForUser } from "../services/gistService";
+import { RootContext } from "../App";
 
 const Search = () => {
   const [username, serUsername] = useState("");
+  const state = useContext(RootContext);
+
+  /**
+   nested array destructuring with default values
+  */
+  const {
+    pubGists: [publicGists = [], setPublicGists = []],
+  } = state;
 
   // handler for update state when input change (i.e user type his/her name)
   const handleChange = async (event) => {
     try {
-      serUsername(event.target.value)
-      // const response = await getGistForUser()
+      serUsername(event.target.value);
+      throt_fun();
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
-  }
+  };
+
+  // Calling throttle() method with its parameter
+  const throt_fun = _.throttle(async () => {
+    try {
+      const response = await getGistForUser(username);
+      if (response.status === 200) {
+        setPublicGists(response.data);
+      } else {
+        console.log("Not found");
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }, 1000);
 
   return (
     <Wrapper>
       <InputBox>
         <Octicon name="search" />
-        <Input placeholder="Search Gists for the username" onChange={handleChange} />
+        <Input
+          placeholder="Search Gists for the username"
+          onChange={handleChange}
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -48,9 +77,9 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+export default Search;

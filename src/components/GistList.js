@@ -11,8 +11,7 @@ const GistList = () => {
    nested array destructuring with default values
   */
   const {
-    pubGists: [publicGists = [], setPublicGists = []],
-    userGists: [gistForUser = [], setGistForUser = []],
+    pubGists: [publicGists = []],
   } = state;
 
   return (
