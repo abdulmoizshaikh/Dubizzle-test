@@ -3,13 +3,20 @@ import styled from 'styled-components'
 import Octicon from 'react-octicon'
 
 // services
-import { getGistForUser } from "../services/gistService";
+// import { getGistForUser } from "../services/gistService";
 
 const Search = () => {
   const [username, serUsername] = useState("");
 
   // handler for update state when input change (i.e user type his/her name)
-  const handleChange = (event) => serUsername(event.target.value)
+  const handleChange = async (event) => {
+    try {
+      serUsername(event.target.value)
+      // const response = await getGistForUser()
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
 
   return (
     <Wrapper>

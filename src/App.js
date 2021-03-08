@@ -4,6 +4,7 @@ import { useState, createContext, useEffect } from "react";
 import styled from "styled-components";
 import Header from "./components/Header";
 import GlobalStyles from "./GlobalStyle";
+import GistList from "./components/GistList";
 
 /**Services */
 import { getPublicGists } from "./services/gistService";
@@ -13,33 +14,37 @@ export const RootContext = createContext();
 
 const App = () => {
   const [publicGists, setPublicGists] = useState([]);
+  const [gistForUser, setGistForUser] = useState([]);
 
   useEffect(() => {
     /**handler for getting list of public list when component view loads */
-    getPublicGistsHandler()
+    getPublicGistsHandler();
   }, []);
 
   const getPublicGistsHandler = async () => {
     try {
       const { data } = await getPublicGists();
+      console.log("data[0]", data[0]);
       setPublicGists(data);
       return () => {
         // cleanup;
       };
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
-  }
+  };
 
   return (
     <RootContext.Provider
       value={{
         pubGists: [publicGists, setPublicGists],
+        userGists: [gistForUser, setGistForUser],
       }}
     >
       <Wrapper className="App" data-testid="app">
         <Header />
         <GlobalStyles />
+        <GistList />
       </Wrapper>
     </RootContext.Provider>
   );
