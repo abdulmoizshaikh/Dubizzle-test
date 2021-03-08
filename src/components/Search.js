@@ -17,7 +17,7 @@ const Search = () => {
    nested array destructuring with default values
   */
   const {
-    pubGists: [publicGists = [], setPublicGists = []],
+    pubGists: [publicGists, setPublicGists],
   } = state;
 
   // handler for update state when input change (i.e user type his/her name)
@@ -26,7 +26,7 @@ const Search = () => {
       serUsername(event.target.value);
       throt_fun();
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error || error.message);
     }
   };
 
@@ -37,10 +37,10 @@ const Search = () => {
       if (response.status === 200) {
         setPublicGists(response.data);
       } else {
-        console.log("Not found");
+        console.log("Something went wrong");
       }
     } catch (error) {
-      throw new Error(error.message);
+      console.error(error.message);
     }
   }, 1000);
 

@@ -1,12 +1,8 @@
 import { useState, createContext, useEffect } from "react";
-
-/**Components */
 import styled from "styled-components";
 import Header from "./components/Header";
 import GlobalStyles from "./GlobalStyle";
 import GistList from "./components/GistList";
-
-/**Services */
 import { getPublicGists } from "./services/gistService";
 
 /**Creating and passing RootContext to use useContext in child components for state management */
@@ -16,7 +12,7 @@ const App = () => {
   const [publicGists, setPublicGists] = useState([]);
 
   useEffect(() => {
-    /**handler for getting list of public list when component view loads */
+    /**handler for getting list of public list when component loads/mount */
     getPublicGistsHandler();
   }, []);
 
@@ -28,7 +24,7 @@ const App = () => {
         // cleanup;
       };
     } catch (error) {
-      throw new Error(error.message);
+      console.error(error || error.message);
     }
   };
 
