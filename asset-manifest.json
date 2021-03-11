@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.js": "/abdulmoizshaikh/Dubizzle-test/static/js/main.fd08ad3d.chunk.js",
+    "main.js.map": "/abdulmoizshaikh/Dubizzle-test/static/js/main.fd08ad3d.chunk.js.map",
+    "runtime-main.js": "/abdulmoizshaikh/Dubizzle-test/static/js/runtime-main.3b0fc94b.js",
+    "runtime-main.js.map": "/abdulmoizshaikh/Dubizzle-test/static/js/runtime-main.3b0fc94b.js.map",
+    "static/css/2.ed8bda73.chunk.css": "/abdulmoizshaikh/Dubizzle-test/static/css/2.ed8bda73.chunk.css",
+    "static/js/2.e0642bb0.chunk.js": "/abdulmoizshaikh/Dubizzle-test/static/js/2.e0642bb0.chunk.js",
+    "static/js/2.e0642bb0.chunk.js.map": "/abdulmoizshaikh/Dubizzle-test/static/js/2.e0642bb0.chunk.js.map",
+    "index.html": "/abdulmoizshaikh/Dubizzle-test/index.html",
+    "static/css/2.ed8bda73.chunk.css.map": "/abdulmoizshaikh/Dubizzle-test/static/css/2.ed8bda73.chunk.css.map",
+    "static/js/2.e0642bb0.chunk.js.LICENSE.txt": "/abdulmoizshaikh/Dubizzle-test/static/js/2.e0642bb0.chunk.js.LICENSE.txt",
+    "static/media/octicons.css": "/abdulmoizshaikh/Dubizzle-test/static/media/octicons.f9ced0fc.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3b0fc94b.js",
+    "static/css/2.ed8bda73.chunk.css",
+    "static/js/2.e0642bb0.chunk.js",
+    "static/js/main.fd08ad3d.chunk.js"
+  ]
+}
