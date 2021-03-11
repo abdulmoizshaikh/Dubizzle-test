@@ -10,28 +10,42 @@ export const RootContext = createContext();
 
 const App = () => {
   const [publicGists, setPublicGists] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
+    setIsFetching(true);
     /**handler for getting list of public list when component loads/mount */
-    getPublicGistsHandler();
+    getPublicGistsHandler()
+      .then((gists) => {
+        console.log("gists", gists);
+        setIsFetching(false);
+        return () => {
+          // cleanup;
+        };
+      })
+      .catch((err) => {
+        setIsFetching(false);
+        console.error(err);
+      });
   }, []);
 
-  const getPublicGistsHandler = async () => {
-    try {
-      const { data } = await getPublicGists();
-      setPublicGists(data);
-      return () => {
-        // cleanup;
-      };
-    } catch (error) {
-      console.error(error || error.message);
-    }
+  const getPublicGistsHandler = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await getPublicGists();
+        setPublicGists(data);
+        resolve(data);
+      } catch (error) {
+        reject(error || error.message);
+      }
+    });
   };
 
   return (
     <RootContext.Provider
       value={{
         pubGists: [publicGists, setPublicGists],
+        fetching: [isFetching, setIsFetching],
       }}
     >
       <Wrapper className="App" data-testid="app">

@@ -4,38 +4,57 @@ import Octicon from "react-octicon";
 import _ from "lodash";
 
 // services
-import { getGistForUser } from "../services/gistService";
+import { getGistForUser, getPublicGists } from "../services/gistService";
 import { RootContext } from "../App";
 
 const Search = () => {
   const state = useContext(RootContext);
+  const [username, setUsername] = useState("");
 
   /**
    nested array destructuring with default values
   */
   const {
     pubGists: [publicGists, setPublicGists],
+    fetching: [isFetching, setIsFetching],
   } = state;
 
   // handler for update state when input change (i.e user type his/her name)
-  const handleChange = async (event) => {
+  const handleChange = async ({ target: { value } }) => {
     try {
-      throt_fun(event.target.value);
+      setUsername(value);
+      let prevState = value.slice(0, value.length - 1);
+      if (username === prevState && publicGists.length === 0) {
+        // not call API
+        console.log("not calling further API for better performace ");
+      } else {
+        throt_fun(value);
+      }
     } catch (error) {
       throw new Error(error || error.message);
     }
   };
 
   // Calling throttle() method with its parameter
-  const throt_fun = _.throttle(async (value) => {
+  const throt_fun = _.throttle(async (name) => {
     try {
-      const response = await getGistForUser(value);
+      setIsFetching(true);
+      let response;
+      if (name) {
+        response = await getGistForUser(name);
+      } else {
+        //get all public gist
+        response = await getPublicGists();
+      }
+
       if (response.status === 200) {
         setPublicGists(response.data);
       } else {
         console.log("Something went wrong");
       }
+      setIsFetching(false);
     } catch (error) {
+      setIsFetching(false);
       console.error(error.message);
     }
   }, 1000);
