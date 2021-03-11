@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Octicon from "react-octicon";
-
-// Requiring lodash library
 import _ from "lodash";
 
 // services

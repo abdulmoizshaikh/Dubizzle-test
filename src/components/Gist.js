@@ -1,6 +1,7 @@
 import Octicon from "react-octicon";
 import styled from "styled-components";
 import GistHeader from "./GistHeader";
+import propTypes from "prop-types";
 
 const Gist = ({ gist }) => {
   /*   
@@ -31,6 +32,11 @@ const Gist = ({ gist }) => {
       </RenderFiles>
     </Wrapper>
   );
+};
+
+// types testing of paraps
+Gist.propTypes = {
+  gist: propTypes.object,
 };
 
 const Wrapper = styled.div`
